@@ -56,15 +56,33 @@ PowerToys Run has been replaced by **Flow Launcher**, operating with a custom mo
 
 ## 🗺️ Workflow & Muscle Memory Cheat Sheet
 
-A quick reference for daily operations without touching the mouse:
+A quick reference for daily operations, designed to keep your hands on the keyboard and out of the Windows GUI.
 
-* **Jump to a directory:** `z <folder-name>` (e.g., `z dotfiles`)
-* **List files:** `ls` or `ll` (triggers `eza`)
-* **Visual File Manager:** `yazi` (Use arrow keys or `hjkl` to navigate, `q` to quit)
-* **Search inside logs:** `rg "failed login" <filename>`
-* **Format a JSON log:** `cat data.json | jq`
-* **Monitor system resources:** `btop`
-* **Trigger Flow Launcher:** `Alt + Space`
+### 📂 Navigation & File Operations
+* **Smart Directory Jump:** `z <folder-name>` *(Teleports instantly to the best match)*
+* **Jump to Previous Directory:** `z -`
+* **List Files (Detailed):** `eza -la` *(Shows hidden files, permissions, and icons)*
+* **Visual File Manager:** `yazi` *(Use `h`,`j`,`k`,`l` to navigate, `Enter` to open, `q` to quit)*
+* **Find a File by Name:** `fd "target_name"` *(Searches recursively and ignores junk files)*
+* **Extract an Archive:** `7z x payload.zip`
+
+### 🔎 Log Hunting & Data Parsing (SOC Core)
+* **Search Text Inside Logs:** `rg "Failed password"` *(Searches all files in current directory)*
+* **Search Case-Insensitive:** `rg -i "malicious_ip"` 
+* **Format a JSON Log:** `cat data.json | jq` *(Colorizes and formats unreadable JSON walls)*
+* **Filter JSON for Specific Data:** `cat logs.json | jq '.event.ip_address'`
+* **Fuzzy Find Files/History:** `fzf` *(Interactive real-time filtering)*
+
+### 🕵️ OSINT & Media Processing
+* **Download Video Evidence:** `yt-dlp "<URL>"` *(Pulls best quality video from a platform)*
+* **Extract Audio from Video:** `ffmpeg -i evidence.mp4 -vn output.mp3`
+* **Generate File Hash (via Flow):** `Alt + Space` -> `hash target_file.exe`
+* **Check IP Address (via Flow):** `Alt + Space` -> `ip`
+
+### 💻 System & Environment Control
+* **Monitor System Resources:** `btop` *(Press `q` to quit)*
+* **Trigger Command Hub:** `Alt + Space` *(Flow Launcher)*
+* **Reload PowerShell Profile:** `. $PROFILE` *(Applies dotfile changes without restarting terminal)*
 
 ---
 
@@ -80,6 +98,82 @@ The visual design language across all applications is strictly high-contrast mon
 
 ---
 
+## 🛡️ Windows Provisioning & Hardening Runbook
+
+When deploying a fresh Windows installation, GUI-based Control Panel setups are inefficient. Execute the following standard operating procedures (SOPs) to harden the OS, strip telemetry, and establish a secure baseline before installing the software loadout.
+
+### Phase 1: Core OS Procedures
+1. **System Debloat:** Run [Win11Debloat](https://github.com/W4RH4WK/Debloat-Windows-11) to strip out consumer telemetry, background tracking, and unneeded Windows Store applications to reduce the attack surface.
+2. **Disable Fast Startup & Hibernation:** Fast Startup locks the Windows drive kernel, causing corruption during dual-booting and blocking CLI boot record repairs. 
+   * *Command:* Open Admin CMD and run `powercfg.exe /hibernate off`.
+3. **Enable Full Disk Encryption:** Activate BitLocker immediately to secure physical data at rest. Backup the recovery key to an encrypted offline drive, not just a Microsoft account.
+4. **Network Hardening:** Disable LLMNR and NetBIOS via Group Policy. These are legacy protocols that are easily poisoned during local network attacks.
+5. **PowerShell Visibility:** Enable **PowerShell Script Block Logging (Event ID 4104)** via Group Policy to record the exact contents of executed scripts for forensic visibility.
+6. **Network Configuration:** Rely on DHCP for the primary workstation to prevent connection failures on external networks. Reserve static IPs exclusively for stationary homelab hardware.
+
+---
+
+### Phase 2: Software Loadout & Inventory
+
+The workstation relies on the following application stacks for development, security diagnostics, and media handling.
+
+#### 🕵️ Security, Forensics & Blue Team
+* **Sysinternals Suite:** `procexp`, `procmon`, `tcpview`, `autoruns` (Portable instances for rapid diagnostic execution via Flow Launcher).
+* **VeraCrypt:** On-the-fly encrypted volume management.
+* **HxD Hex Editor:** Raw memory and binary file analysis.
+* **Tor Browser:** Secure and isolated OSINT navigation.
+
+#### 🌐 Network & Infrastructure
+* **Tunnels & VPNs:** Proton VPN, Tailscale, Cloudflare WARP.
+* **Virtualization & Remote:** VMware Workstation, PuTTY.
+* **Flash & Boot Management:** BalenaEtcher.
+
+#### 💻 Hardware & System Diagnostics
+* **Monitoring:** CPUID ROG CPU-Z, CPUID HWMonitor, TechPowerUp GPU-Z, MSI Afterburner.
+* **Optimization:** Mem Reduct, Unpark CPU.
+* **Storage Analysis:** CrystalDiskInfo, WizTree.
+
+#### 🎨 Media, OSINT Capture & Editing
+* **Video Production:** DaVinci Resolve, Adobe After Effects, Adobe Media Encoder, CapCut.
+* **Audio Routing:** Voicemeeter, VB Cable, Audio Router.
+* **Capture & Artifacts:** OBS Studio, PicPick, 4K Video Downloader+.
+* **Image Processing:** Photoshop, GIMP, ImageMagick.
+
+#### 🧠 Productivity, AI & Workspace
+* **Knowledge Management:** Logseq.
+* **Browsers:** Zen Browser, Brave.
+* **AI Engines:** Claude, Perplexity.
+* **Comms & Transfer:** Discord, Telegram, LINE, Proton Mail, Proton Drive, iCloud, Blip.
+* **Utilities:** Recordly, Everything Search, WinRAR *(Note: 7-Zip CLI is primary for terminal ops)*, LOGA Deva Wireless Driver, NVIDIA App.
+
+#### 🛠️ Dev Toolkit & TUI Environment
+* **Environment Core:** Flow Launcher, Komorebi, whkd, YASB Reborn, Pear Desktop, Oh My Posh.
+* **Languages & Git:** Python, Java, Bun, Git.
+* **CLI Arsenal:** PowerShell, btop4win, eza, fd, fzf, jq, zoxide, yazi, FFmpeg.
+
+---
+
+### Phase 3: Post-Deployment Auditing Scripts
+
+The standard Windows Control Panel natively hides AppX packages, portable tools, and user-level installations. To verify a successful deployment or audit a machine, run these commands in PowerShell to dump the true software inventory to your desktop:
+
+**1. Query Winget Managed Packages:**
+```powershell
+winget list > "$Home\Desktop\WingetApps.txt"
+```
+
+**2. Query Modern Windows Apps (AppX):**
+```powershell
+Get-AppxPackage | Select-Object Name, Version > "$Home\Desktop\ModernApps.txt"
+```
+
+**3. Query the Registry:**
+```powershell
+Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*, HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*, HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Select-Object DisplayName, DisplayVersion | Where-Object {$_.DisplayName -ne $null} | Sort-Object DisplayName > "$Home\Desktop\RegistryApps.txt"
+```
+
+---
+
 ## 🚀 Restoration Guide
 
 *When setting up a fresh Windows installation, follow these steps to restore the environment:*
@@ -87,5 +181,6 @@ The visual design language across all applications is strictly high-contrast mon
 1.  **Clone the Repository:**
     `git clone https://github.com/YOUR_USERNAME/dotfiles.git $Home\Documents\GitHub\dotfiles`
 2.  **Install Base Requirements:** Install Winget, Git, Windows Terminal, and PowerShell 7.
-3.  **Run Tool Installations:** Install the utilities listed in the tables above.
-4.  **Execute Symlinks:** Remove original configurations and create hardlinks back to this repository. *(Symlink script pending).*
+3.  Run Tool Installations: Run the included install.ps1 script to automate all winget downloads and rebuild the directory symlinks.
+
+---
