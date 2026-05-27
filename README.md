@@ -84,6 +84,17 @@ A quick reference for daily operations, designed to keep your hands on the keybo
 * **Trigger Command Hub:** `Alt + Space` *(Flow Launcher)*
 * **Reload PowerShell Profile:** `. $PROFILE` *(Applies dotfile changes without restarting terminal)*
 
+### Git & Version Control (Dotfiles Management)
+* **Sync from Cloud:** `git pull` (Pulls the latest changes from GitHub to your PC)
+* **Stage Changes:** `git add .` (Prepares all modified files for backup)
+* **Lock in Changes:** `git commit -m "update config"` (Saves the state locally)
+* **Push to Cloud:** `git push` (Uploads everything to GitHub)
+
+### Sysinternals & Threat Hunting
+* **Hunt Persistence:** `autoruns` (Instantly pulls up every registry key, scheduled task, and service that starts with Windows to look for malware)
+* **Deep Process Inspection:** `procexp` (Process Explorer: far more detailed than Task Manager, allows you to verify digital signatures of running apps)
+* **Network Connections:** `tcpview` (Shows exactly which applications are connecting to which IP addresses in real-time)
+
 ---
 
 ## 🎨 Theme Architecture
@@ -104,13 +115,20 @@ When deploying a fresh Windows installation, GUI-based Control Panel setups are 
 
 ### Phase 1: Core OS Procedures
 1. **System Debloat:** Run [Win11Debloat](https://github.com/W4RH4WK/Debloat-Windows-11) to strip out consumer telemetry, background tracking, and unneeded Windows Store applications to reduce the attack surface.
-2. **Disable Fast Startup & Hibernation:** Fast Startup locks the Windows drive kernel, causing corruption during dual-booting and blocking CLI boot record repairs. 
+2. **Account Privilege Separation (Least Privilege Hardening):** 
+   * Retain the initial account created during Windows setup strictly as a **Local Administrator** account for structural modifications, elevation prompts, and installs.
+   * Create a separate **Local Standard User** account for daily workflow operations (browsing, studying, labbing) to prevent unauthorized malware persistence or system changes.
+   * *Powershell command:* `New-LocalUser -Name "YourUsername" -Description "Daily TUI Workflow Account" -NoPassword`
+3. **Disable Fast Startup & Hibernation:** Fast Startup locks the Windows drive kernel, causing corruption during dual-booting and blocking CLI boot record repairs. 
    * *Command:* Open Admin CMD and run `powercfg.exe /hibernate off`.
-3. **Enable Full Disk Encryption:** Activate BitLocker immediately to secure physical data at rest. Backup the recovery key to an encrypted offline drive, not just a Microsoft account.
-4. **Network Hardening:** Disable LLMNR and NetBIOS via Group Policy. These are legacy protocols that are easily poisoned during local network attacks.
-5. **PowerShell Visibility:** Enable **PowerShell Script Block Logging (Event ID 4104)** via Group Policy to record the exact contents of executed scripts for forensic visibility.
-6. **Network Configuration:** Rely on DHCP for the primary workstation to prevent connection failures on external networks. Reserve static IPs exclusively for stationary homelab hardware.
-
+4. **Power Plan Architecture (Hardware Dependent):**
+   * *For Desktop Workstations:* Open Admin PowerShell and run `powercfg -setscheme 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c` to unlock the "High Performance" plan for maximum CPU throughput.
+   * *For Mobile Laptops:* Retain the "Balanced" power plan to optimize battery lifecycle and manage thermal throttling.
+5. **Enable Full Disk Encryption:** Activate BitLocker immediately to secure physical data at rest. Backup the recovery key to an encrypted offline drive, not just a Microsoft account.
+6. **Network Hardening:** Disable LLMNR and NetBIOS via Group Policy. These are legacy protocols that are easily poisoned during local network attacks.
+7. **PowerShell Visibility:** Enable **PowerShell Script Block Logging (Event ID 4104)** via Group Policy to record the exact contents of executed scripts for forensic visibility.
+8. **Network Configuration:** Rely on DHCP for the primary workstation to prevent connection failures on external networks. Reserve static IPs exclusively for stationary homelab hardware.
+   
 ---
 
 ### Phase 2: Software Loadout & Inventory
