@@ -95,7 +95,7 @@ A quick reference for daily operations, designed to keep your hands on the keybo
 * **Deep Process Inspection:** `procexp` (Process Explorer: far more detailed than Task Manager, allows you to verify digital signatures of running apps) `procmon` (Process Monitor: a live-capturing timeline that records every file, registry, and network interaction an application makes in real-time.)
   * Process Explorer shows what is running, while Process Monitor shows what those programs are doing. 
 * **Network Connections:** `tcpview` (Shows exactly which applications are connecting to which IP addresses in real-time)
-* **Monitoring** `sysmon` (Performs deep, continuous monitoring of system activities and logs them directly to the Windows Event Log)
+* **Monitoring:** `sysmon` (Performs deep, continuous monitoring of system activities and logs them directly to the Windows Event Log)
 
 ---
 
