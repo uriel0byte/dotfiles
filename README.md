@@ -92,8 +92,9 @@ A quick reference for daily operations, designed to keep your hands on the keybo
 
 ### Sysinternals & Threat Hunting
 * **Hunt Persistence:** `autoruns` (Instantly pulls up every registry key, scheduled task, and service that starts with Windows to look for malware)
-* **Deep Process Inspection:** `procexp` (Process Explorer: far more detailed than Task Manager, allows you to verify digital signatures of running apps)
+* **Deep Process Inspection:** `procexp` and `procmon` (Process Explorer: far more detailed than Task Manager, allows you to verify digital signatures of running apps) (Process Monitor: a live-capturing timeline that records every file, registry, and network interaction an application makes in real-time.)
 * **Network Connections:** `tcpview` (Shows exactly which applications are connecting to which IP addresses in real-time)
+* **Monitoring** `sysmon` (Performs deep, continuous monitoring of system activities and logs them directly to the Windows Event Log)
 
 ---
 
