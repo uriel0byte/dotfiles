@@ -168,6 +168,7 @@ The workstation relies on the following application stacks for development, secu
 
 #### 🛠️ Dev Toolkit & TUI Environment
 * **Environment Core:** Flow Launcher, Komorebi, whkd, YASB Reborn, Pear Desktop, Oh My Posh.
+* **IDE & Editors:** VSCodium (Telemetry-free code and Markdown editing).
 * **Languages & Git:** Python, Java, Bun, Git.
 * **CLI Arsenal:** PowerShell, btop4win, eza, fd, fzf, jq, zoxide, yazi, FFmpeg.
 
