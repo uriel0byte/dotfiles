@@ -165,6 +165,7 @@ The workstation relies on the following application stacks for development, secu
 * **AI Engines:** Claude, Perplexity.
 * **Comms & Transfer:** Discord, Telegram, LINE, Proton Mail, Proton Drive, iCloud, Blip.
 * **Utilities:** Recordly, Everything Search, WinRAR *(Note: 7-Zip CLI is primary for terminal ops)*, LOGA Deva Wireless Driver, NVIDIA App.
+* **Office Suite:** LibreOffice (Open-source, telemetry-free document and spreadsheet processing).
 
 #### 🛠️ Dev Toolkit & TUI Environment
 * **Environment Core:** Flow Launcher, Komorebi, whkd, YASB Reborn, Pear Desktop, Oh My Posh.
