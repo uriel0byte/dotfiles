@@ -39,6 +39,7 @@ I rely on the following command-line tools to bypass standard Windows GUI operat
 | **Oh My Posh** | Custom terminal prompt styling (`atomic` theme) | `winget install JanDeDobbeleer.OhMyPosh` |
 | **FFmpeg** | Core engine for audio/video conversion and analysis | `winget install Gyan.FFmpeg` |
 | **7-Zip** | Command-line archiving and extraction utility | `winget install 7zip.7zip` |
+| **PowerSession** | Asciinema-style CLI session recorder for documentation | `winget install Watfaq.PowerSession` |
 
 ---
 
@@ -59,43 +60,55 @@ PowerToys Run has been replaced by **Flow Launcher**, operating with a custom mo
 A quick reference for daily operations, designed to keep your hands on the keyboard and out of the Windows GUI.
 
 ### 📂 Navigation & File Operations
-* **Smart Directory Jump:** `z <folder-name>` *(Teleports instantly to the best match)*
-* **Jump to Previous Directory:** `z -`
-* **List Files (Detailed):** `eza -la` *(Shows hidden files, permissions, and icons)*
-* **Visual File Manager:** `yazi` *(Use `h`,`j`,`k`,`l` to navigate, `Enter` to open, `q` to quit)*
-* **Find a File by Name:** `fd "target_name"` *(Searches recursively and ignores junk files)*
-* **Extract an Archive:** `7z x payload.zip`
+| Action | Command | Details |
+| :--- | :--- | :--- |
+| **Smart Directory Jump** | `z <folder-name>` | Teleports instantly to the best match |
+| **Jump to Previous Directory**| `z -` | |
+| **List Files (Detailed)** | `eza -la` | Shows hidden files, permissions, and icons |
+| **Visual File Manager** | `yazi` | Use `h`,`j`,`k`,`l` to navigate, `Enter` to open, `q` to quit |
+| **Find a File by Name** | `fd "target_name"` | Searches recursively and ignores junk files |
+| **Extract an Archive** | `7z x payload.zip` | |
 
 ### 🔎 Log Hunting & Data Parsing (SOC Core)
-* **Search Text Inside Logs:** `rg "Failed password"` *(Searches all files in current directory)*
-* **Search Case-Insensitive:** `rg -i "malicious_ip"` 
-* **Format a JSON Log:** `cat data.json | jq` *(Colorizes and formats unreadable JSON walls)*
-* **Filter JSON for Specific Data:** `cat logs.json | jq '.event.ip_address'`
-* **Fuzzy Find Files/History:** `fzf` *(Interactive real-time filtering)*
+| Action | Command | Details |
+| :--- | :--- | :--- |
+| **Search Text Inside Logs** | `rg "Failed password"` | Searches all files in current directory |
+| **Search Case-Insensitive** | `rg -i "malicious_ip"` | |
+| **Format a JSON Log** | `cat data.json \| jq` | Colorizes and formats unreadable JSON walls |
+| **Filter JSON for Data** | `cat logs.json \| jq '.event.ip_address'` | |
+| **Fuzzy Find Files/History**| `fzf` | Interactive real-time filtering |
 
 ### 🕵️ OSINT & Media Processing
-* **Download Video Evidence:** `yt-dlp "<URL>"` *(Pulls best quality video from a platform)*
-* **Extract Audio from Video:** `ffmpeg -i evidence.mp4 -vn output.mp3`
-* **Generate File Hash (via Flow):** `Alt + Space` -> `hash target_file.exe`
-* **Check IP Address (via Flow):** `Alt + Space` -> `ip`
+| Action | Command | Details |
+| :--- | :--- | :--- |
+| **Download Video Evidence** | `yt-dlp "<URL>"` | Pulls best quality video from a platform |
+| **Extract Audio from Video**| `ffmpeg -i evidence.mp4 -vn output.mp3` | |
+| **Generate File Hash** | `Alt + Space` -> `hash target_file.exe` | Uses Flow Launcher plugin |
+| **Check IP Address** | `Alt + Space` -> `ip` | Uses Flow Launcher plugin |
 
 ### 💻 System & Environment Control
-* **Monitor System Resources:** `btop` *(Press `q` to quit)*
-* **Trigger Command Hub:** `Alt + Space` *(Flow Launcher)*
-* **Reload PowerShell Profile:** `. $PROFILE` *(Applies dotfile changes without restarting terminal)*
+| Action | Command | Details |
+| :--- | :--- | :--- |
+| **Monitor System Resources**| `btop` | Press `q` to quit |
+| **Trigger Command Hub** | `Alt + Space` | Launches Flow Launcher |
+| **Reload PS Profile** | `. $PROFILE` | Applies dotfile changes without restarting terminal |
 
-### Git & Version Control (Dotfiles Management)
-* **Sync from Cloud:** `git pull` (Pulls the latest changes from GitHub to your PC)
-* **Stage Changes:** `git add .` (Prepares all modified files for backup)
-* **Lock in Changes:** `git commit -m "update config"` (Saves the state locally)
-* **Push to Cloud:** `git push` (Uploads everything to GitHub)
+### 🐙 Git & Version Control (Dotfiles Management)
+| Action | Command | Details |
+| :--- | :--- | :--- |
+| **Sync from Cloud** | `git pull` | Pulls the latest changes from GitHub to your PC |
+| **Stage Changes** | `git add .` | Prepares all modified files for backup |
+| **Lock in Changes** | `git commit -m "update config"` | Saves the state locally |
+| **Push to Cloud** | `git push` | Uploads everything to GitHub |
 
-### Sysinternals & Threat Hunting
-* **Hunt Persistence:** `autoruns` (Instantly pulls up every registry key, scheduled task, and service that starts with Windows to look for malware)
-* **Deep Process Inspection:** `procexp` (Process Explorer: far more detailed than Task Manager, allows you to verify digital signatures of running apps) `procmon` (Process Monitor: a live-capturing timeline that records every file, registry, and network interaction an application makes in real-time.)
-  * Process Explorer shows what is running, while Process Monitor shows what those programs are doing. 
-* **Network Connections:** `tcpview` (Shows exactly which applications are connecting to which IP addresses in real-time)
-* **Monitoring:** `sysmon` (Performs deep, continuous monitoring of system activities and logs them directly to the Windows Event Log)
+### 🛡️ Sysinternals & Threat Hunting
+| Action | Command | Details |
+| :--- | :--- | :--- |
+| **Hunt Persistence** | `autoruns` | Instantly pulls up every registry key, scheduled task, and service that starts with Windows to look for malware |
+| **Deep Process Inspection** | `procexp` | Process Explorer: far more detailed than Task Manager, allows you to verify digital signatures of running apps |
+| **Process Monitoring** | `procmon` | Process Monitor: a live-capturing timeline that records every file, registry, and network interaction an application makes in real-time |
+| **Network Connections** | `tcpview` | Shows exactly which applications are connecting to which IP addresses in real-time |
+| **Deep Logging** | `sysmon` | Performs deep, continuous monitoring of system activities and logs them directly to the Windows Event Log |
 
 ---
 
@@ -171,7 +184,7 @@ The workstation relies on the following application stacks for development, secu
 * **Environment Core:** Flow Launcher, Komorebi, whkd, YASB Reborn, Pear Desktop, Oh My Posh.
 * **IDE & Editors:** VSCodium (Telemetry-free code and Markdown editing).
 * **Languages & Git:** Python, Java, Bun, Git.
-* **CLI Arsenal:** PowerShell, btop4win, eza, fd, fzf, jq, zoxide, yazi, FFmpeg.
+* **CLI Arsenal:** PowerShell, btop4win, eza, fd, fzf, jq, zoxide, yazi, FFmpeg, PowerSession.
 
 ---
 
