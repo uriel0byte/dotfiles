@@ -109,6 +109,7 @@ A quick reference for daily operations, designed to keep your hands on the keybo
 | **Process Monitoring** | `procmon` | Process Monitor: a live-capturing timeline that records every file, registry, and network interaction an application makes in real-time |
 | **Network Connections** | `tcpview` | Shows exactly which applications are connecting to which IP addresses in real-time |
 | **Deep Logging** | `sysmon` | Performs deep, continuous monitoring of system activities and logs them directly to the Windows Event Log |
+**Secure Deletion:** | `sdelete -p 3 <file>` | Cryptographically shreds a file. Use `sdelete -z C:` to wipe all free space on the drive. |
 
 ---
 
@@ -155,16 +156,21 @@ The workstation relies on the following application stacks for development, secu
 * **VeraCrypt:** On-the-fly encrypted volume management.
 * **HxD Hex Editor:** Raw memory and binary file analysis.
 * **Tor Browser:** Secure and isolated OSINT navigation.
+* **Password Management:** Bitwarden (Dedicated desktop client for secure, encrypted vault access).
+* **Database Forensics:** DB Browser for SQLite (GUI for analyzing local app databases and extracting OSINT artifacts).
 
 #### 🌐 Network & Infrastructure
 * **Tunnels & VPNs:** Proton VPN, Tailscale, Cloudflare WARP.
 * **Virtualization & Remote:** VMware Workstation, PuTTY.
 * **Flash & Boot Management:** BalenaEtcher.
+* **Packet Analysis:** Wireshark (The industry standard for deep network protocol and traffic analysis).
+* **Network Mapping:** Nmap & Zenmap (CLI and GUI engines for network discovery, port scanning, and security auditing).
 
 #### 💻 Hardware & System Diagnostics
 * **Monitoring:** CPUID ROG CPU-Z, CPUID HWMonitor, TechPowerUp GPU-Z, MSI Afterburner.
 * **Optimization:** Mem Reduct, Unpark CPU.
 * **Storage Analysis:** CrystalDiskInfo, WizTree.
+* **System Cleaning:** BleachBit (Open-source GUI for clearing telemetry cache and securely shredding files).
 
 #### 🎨 Media, OSINT Capture & Editing
 * **Video Production:** DaVinci Resolve, Adobe After Effects, Adobe Media Encoder, CapCut.
