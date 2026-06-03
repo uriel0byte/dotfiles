@@ -40,6 +40,7 @@ I rely on the following command-line tools to bypass standard Windows GUI operat
 | **FFmpeg** | Core engine for audio/video conversion and analysis | `winget install Gyan.FFmpeg` |
 | **7-Zip** | Command-line archiving and extraction utility | `winget install 7zip.7zip` |
 | **PowerSession** | Asciinema-style CLI session recorder for documentation | `winget install Watfaq.PowerSession` |
+| **PSReadLine** | Advanced command-line editing, syntax highlighting, and predictive intellisense | `Install-Module -Name PSReadLine -Force` |
 
 ---
 
