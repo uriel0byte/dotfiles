@@ -124,7 +124,7 @@ When investigating a compromised endpoint, execute the toolstack in the followin
 | **Process Monitoring** | `procmon` | Process Monitor: a live-capturing timeline that records every file, registry, and network interaction an application makes in real-time |
 | **Network Connections** | `tcpview` | Shows exactly which applications are connecting to which IP addresses in real-time |
 | **Deep Logging** | `sysmon` | Performs deep, continuous monitoring of system activities and logs them directly to the Windows Event Log |
-**Secure Deletion:** | `sdelete -p 3 <file>` | Cryptographically shreds a file. Use `sdelete -z C:` to wipe all free space on the drive. |
+| **Secure Deletion:** | `sdelete -p 3 <file>` | Cryptographically shreds a file. Use `sdelete -z C:` to wipe all free space on the drive. |
 
 ---
 
@@ -178,6 +178,10 @@ The workstation relies on the following application stacks for development, secu
 * **Disk Forensics Platform:** Autopsy & The Sleuth Kit (The primary graphical workbench for deep-dive disk image analysis, timeline creation, and artifact recovery).
 * **Memory Triage:** Volatility 3 (Python CLI framework strictly for dissecting raw RAM captures to identify fileless malware, rootkits, and rogue process injection).
 * **Data Swiss Army Knife:** CyberChef (Local HTML instance for rapid Base64 decoding, hex dumping, shellcode analysis, and IOC defanging).
+* **Static Malware Triage:** peStudio & FLOSS (GUI and CLI analyzers for dissecting PE headers, flagging malicious imports, and extracting obfuscated strings).
+* **Fast Log Hunting:** Hayabusa (Blazing-fast Rust CLI threat hunting engine that uses Sigma rules to parse Windows Event Logs into terminal timelines).
+* **Enterprise IR Triage:** KAPE (Surgical artifact collector used in corporate incident response to grab MFT, registry, and event logs in minutes).
+* **Metadata Forensics:** ExifTool (The definitive CLI engine for extracting hidden OSINT metadata and GPS coordinates from files and media).
 
 #### 🌐 Network & Infrastructure
 * **Tunnels & VPNs:** Proton VPN, Tailscale, Cloudflare WARP.
@@ -191,17 +195,17 @@ The workstation relies on the following application stacks for development, secu
 * **Optimization:** Mem Reduct, Unpark CPU.
 * **Storage Analysis:** CrystalDiskInfo, WizTree.
 * **System Cleaning:** BleachBit (Open-source GUI for clearing telemetry cache and securely shredding files).
-* **Anti-Virus:** ClamAV and ClanWin.
+* **Anti-Virus:** ClamAV and ClamWin.
 
 #### 🎨 Media, OSINT Capture & Editing
 * **Video Production:** DaVinci Resolve, Adobe After Effects, Adobe Media Encoder, CapCut.
 * **Audio Routing:** Voicemeeter, VB Cable, Audio Router.
-* **Capture & Artifacts:** OBS Studio, PicPick, 4K Video Downloader+, Greenshots.
+* **Capture & Artifacts:** OBS Studio, PicPick, 4K Video Downloader+, Greenshot.
 * **Image Processing:** Photoshop, GIMP, ImageMagick.
 
 #### 🧠 Productivity, AI & Workspace
 * **Knowledge Management:** Logseq.
-* **Browsers:** Zen Browser, Brave, Libre Wolf.
+* **Browsers:** Zen Browser, Brave, LibreWolf.
 * **AI Engines:** Claude, Perplexity.
 * **Comms & Transfer:** Discord, Telegram, LINE, Proton Mail, Proton Drive, iCloud, Blip.
 * **Utilities:** Recordly, Everything Search, WinRAR *(Note: 7-Zip CLI is primary for terminal ops)*, LOGA Deva Wireless Driver, NVIDIA App.
@@ -243,6 +247,6 @@ Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uni
 1.  **Clone the Repository:**
     `git clone https://github.com/YOUR_USERNAME/dotfiles.git $Home\Documents\GitHub\dotfiles`
 2.  **Install Base Requirements:** Install Winget, Git, Windows Terminal, and PowerShell 7.
-3.  Run Tool Installations: Run the included install.ps1 script to automate all winget downloads and rebuild the directory symlinks.
+3.  **Run Tool Installations:** Run the included `install.ps1` script to automate all `winget` downloads and rebuild directory symlinks.
 
 ---
