@@ -176,12 +176,12 @@ The workstation relies on the following application stacks for development, secu
 #### 🎨 Media, OSINT Capture & Editing
 * **Video Production:** DaVinci Resolve, Adobe After Effects, Adobe Media Encoder, CapCut.
 * **Audio Routing:** Voicemeeter, VB Cable, Audio Router.
-* **Capture & Artifacts:** OBS Studio, PicPick, 4K Video Downloader+.
+* **Capture & Artifacts:** OBS Studio, PicPick, 4K Video Downloader+, Greenshots.
 * **Image Processing:** Photoshop, GIMP, ImageMagick.
 
 #### 🧠 Productivity, AI & Workspace
 * **Knowledge Management:** Logseq.
-* **Browsers:** Zen Browser, Brave.
+* **Browsers:** Zen Browser, Brave, Libre Wolf.
 * **AI Engines:** Claude, Perplexity.
 * **Comms & Transfer:** Discord, Telegram, LINE, Proton Mail, Proton Drive, iCloud, Blip.
 * **Utilities:** Recordly, Everything Search, WinRAR *(Note: 7-Zip CLI is primary for terminal ops)*, LOGA Deva Wireless Driver, NVIDIA App.
