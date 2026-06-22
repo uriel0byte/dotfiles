@@ -50,8 +50,8 @@ PowerToys Run has been replaced by **Flow Launcher**, operating with a custom mo
 
 **Active Security Plugins:**
 * **Everything:** Instant system-wide file indexing and retrieval.
-* **Hash:** Instant MD5, SHA1, and SHA256 generation for malware artifact verification.
-* **IP Address:** One-click retrieval and copying of local/public network IPs.
+* **Hash(str):** Instant MD5, SHA1, and SHA256 generation for malware artifact verification.
+* **IP Address(myips):** One-click retrieval and copying of local/public network IPs.
 * **Sysinternals:** Instant execution of Microsoft diagnostic tools (Procmon, Autoruns).
 
 ---
@@ -78,6 +78,20 @@ A quick reference for daily operations, designed to keep your hands on the keybo
 | **Format a JSON Log** | `cat data.json \| jq` | Colorizes and formats unreadable JSON walls |
 | **Filter JSON for Data** | `cat logs.json \| jq '.event.ip_address'` | |
 | **Fuzzy Find Files/History**| `fzf` | Interactive real-time filtering |
+
+### 🕵️ Digital Forensics Field Guide (Triage SOP)
+
+When investigating a compromised endpoint, execute the toolstack in the following order to prevent destroying volatile evidence:
+
+| Tool | Triage Domain | Field Note & Core Trigger |
+| :--- | :--- | :--- |
+| **FTK Imager** | Evidence Acquisition | **The Scene Preserver.** Use first. Grabs live `.mem` RAM dumps and bit-by-bit `.E01` disk images *without* updating Windows "Last Accessed" file timestamps. |
+| **Volatility 3** | Memory (RAM) Forensics | **The Mind Reader.** Feed it the `.mem` file. Catches fileless malware, rootkits, and injected DLLs sitting in memory that never touched the SSD. <br>`vol -f dump.mem windows.malfind` |
+| **Autopsy** | Dead-Disk Examination | **The Autopsy Table.** Feed it the `.E01` disk file. Recovers emptied Recycle Bin files, builds an OS event timeline, and flags known malware hashes. |
+| **Hindsight** | Web Artifacts | **The Browser Interrogator.** Deep-scans Chromium/Firefox folders to reconstruct web history, cleared caches, and silent background downloads. |
+| **DB Browser** | SQLite Database Parsing| **The App Whisperer.** Opens `.sqlite` files (Discord, browser local storage, WhatsApp backups) to read raw, unrendered application tables. |
+| **CyberChef** | De-obfuscation | **The Data Swiss Army Knife.** Local HTML instance. Use it to safely unpack Base64 walls, convert Hex, and defang malicious URLs (`http` $\rightarrow$ `hxxp`). |
+| **Wireshark** | Network PCAP Parsing | **The Wiretap.** Dissects `.pcap` packet captures to reconstruct downloaded payloads and trace external Command & Control (C2) beaconing. |
 
 ### 🕵️ OSINT & Media Processing
 | Action | Command | Details |
@@ -154,11 +168,16 @@ The workstation relies on the following application stacks for development, secu
 
 #### 🕵️ Security, Forensics & Blue Team
 * **Sysinternals Suite:** `procexp`, `procmon`, `tcpview`, `autoruns` (Portable instances for rapid diagnostic execution via Flow Launcher).
-* **VeraCrypt:** On-the-fly encrypted volume management.
+* **VeraCrypt and Cryptomator:** On-the-fly encrypted volume management.
 * **HxD Hex Editor:** Raw memory and binary file analysis.
 * **Tor Browser:** Secure and isolated OSINT navigation.
 * **Password Management:** Bitwarden (Dedicated desktop client for secure, encrypted vault access).
 * **Database Forensics:** DB Browser for SQLite (GUI for analyzing local app databases and extracting OSINT artifacts).
+* **Forensic Imaging:** FTK Imager (Industry standard for capturing live memory and creating bit-by-bit encrypted disk images).
+* **Browser Forensics:** Hindsight (Parses web browser artifacts, history, and download logs for deep investigation).
+* **Disk Forensics Platform:** Autopsy & The Sleuth Kit (The primary graphical workbench for deep-dive disk image analysis, timeline creation, and artifact recovery).
+* **Memory Triage:** Volatility 3 (Python CLI framework strictly for dissecting raw RAM captures to identify fileless malware, rootkits, and rogue process injection).
+* **Data Swiss Army Knife:** CyberChef (Local HTML instance for rapid Base64 decoding, hex dumping, shellcode analysis, and IOC defanging).
 
 #### 🌐 Network & Infrastructure
 * **Tunnels & VPNs:** Proton VPN, Tailscale, Cloudflare WARP.
@@ -172,6 +191,7 @@ The workstation relies on the following application stacks for development, secu
 * **Optimization:** Mem Reduct, Unpark CPU.
 * **Storage Analysis:** CrystalDiskInfo, WizTree.
 * **System Cleaning:** BleachBit (Open-source GUI for clearing telemetry cache and securely shredding files).
+* **Anti-Virus:** ClamAV and ClanWin.
 
 #### 🎨 Media, OSINT Capture & Editing
 * **Video Production:** DaVinci Resolve, Adobe After Effects, Adobe Media Encoder, CapCut.
@@ -189,7 +209,7 @@ The workstation relies on the following application stacks for development, secu
 
 #### 🛠️ Dev Toolkit & TUI Environment
 * **Environment Core:** Flow Launcher, Komorebi, whkd, YASB Reborn, Pear Desktop, Oh My Posh.
-* **IDE & Editors:** VSCodium (Telemetry-free code and Markdown editing).
+* **IDE & Editors:** VSCodium, Notepad2 and CuteMarkED (Telemetry-free code and Markdown editing).
 * **Languages & Git:** Python, Java, Bun, Git.
 * **CLI Arsenal:** PowerShell, btop4win, eza, fd, fzf, jq, zoxide, yazi, FFmpeg, PowerSession.
 
