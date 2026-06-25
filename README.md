@@ -199,7 +199,7 @@ The workstation relies on the following application stacks for development, secu
 
 #### 🎨 Media, OSINT Capture & Editing
 * **Video Production:** DaVinci Resolve, Adobe After Effects, Adobe Media Encoder, CapCut.
-* **Audio Routing:** Voicemeeter, VB Cable, Audio Router.
+* **Audio Routing:** Voicemeeter, SonoBus, VB Cable, Audio Router.
 * **Capture & Artifacts:** OBS Studio, PicPick, 4K Video Downloader+, Greenshot.
 * **Image Processing:** Photoshop, GIMP, ImageMagick.
 
